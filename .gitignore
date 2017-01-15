@@ -1,0 +1,13 @@
+node_modules
+/app/*.map
+/app/picker/inputs/*.map
+/app/picker/picker-area/*.map
+/app/picker/ruler/*.map
+/app/app.component.js
+/app/app.module.js
+/app/main.js
+/app/picker/inputs/inputs.component.js
+/app/picker/picker-area/area.component.js
+/app/picker/ruler/ruler.component.js
+/app/picker/picker.component.js
+/app/picker/picker.component.js.map

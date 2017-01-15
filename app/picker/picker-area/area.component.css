@@ -1,0 +1,5 @@
+.area {
+     width: 200px;
+     height:200px;
+     background-image: linear-gradient(45deg, red, green);
+}

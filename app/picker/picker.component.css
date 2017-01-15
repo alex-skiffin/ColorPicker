@@ -1,0 +1,12 @@
+inputs {
+    margin: 10px;
+    display: flex;
+}
+
+.result {
+    width: 40px;
+    height:40px;
+    background: #00b000;
+    margin-bottom: 160px;
+    margin-left: 50px;
+}
