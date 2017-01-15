@@ -2,11 +2,13 @@ import { Component, ViewChild } from '@angular/core';
 import { InputsComponent } from './inputs/inputs.component';
 import { PickerAreaComponent } from './picker-area/area.component';
 import { RulerComponent } from './ruler/ruler.component';
+import { ColorPickerService } from './Helpers/ColorPickerService';
 
 @Component({
     selector: 'color-picker',
     templateUrl: 'app/picker/picker.component.template.html',
-    styleUrls: [ 'app/picker/picker.component.css' ]
+    styleUrls: [ 'app/picker/picker.component.css' ],
+    providers: [ColorPickerService]
 })
 
 export class ColorPickerComponent {
@@ -20,17 +22,16 @@ export class ColorPickerComponent {
     private ruler: RulerComponent;
 
     private color(): string {
-        return '#'
-        + this.inputs.colorR
-        + this.inputs.colorG
-        + this.inputs.colorB;
+        return this.colorService.getColor();
     };
 
-    public ngOnInit(): void {
-        this.inputs.colorR='00';
-        this.inputs.colorG='00';
-        this.inputs.colorB='00';
+    constructor(private colorService: ColorPickerService){
+    }
 
-        this.ruler.setGradient();
+    public ngOnInit(): void {
+        this.colorService.colorR='F0';
+        this.colorService.colorG='F0';
+        this.colorService.colorB='F0';
+        this.colorService.changeUrl();
     }
 }
