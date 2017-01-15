@@ -1,4 +1,7 @@
 <picker-area></picker-area>
 <ruler></ruler>
-<canvas class="result" width="40" height="40" [attr.background]="color" ></canvas>
+<div class="result">
+    <canvas width="55" height="55" [style.background]="color()" ></canvas>
+    <p class="color-sign">{{color()}}</p>
+</div>
 <inputs></inputs>

@@ -1,7 +1,7 @@
 <br/>
-<label class="label" align="left" for="R">R:</label>
-<input class="color-input" type="text" #R>
-<label class="label" align="left" for="G">G:</label>
-<input class="color-input" type="text" #G>
-<label class="label" align="left" for="B">B:</label>
-<input class="color-input" type="text" #B>
+<label>R:</label>
+<input class="color-input" type="text" [value]="colorR" (keyup)="colorR = validateInput($event.target.value)">
+<label>G:</label>
+<input class="color-input" type="text" [value]="colorG" (input)="colorG = validateInput($event.target.value)">
+<label>B:</label>
+<input class="color-input" type="text" [value]="colorB" (input)="colorB = validateInput($event.target.value)">
