@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 @Injectable()
 export class ColorPickerService {
 
-    private colorR: string = '';
-    private colorG: string = '';
-    private colorB: string = '';
+    private colorR: string = 'F0';
+    private colorG: string = 'F0';
+    private colorB: string = 'F0';
 
     constructor(private router: Router){
     }

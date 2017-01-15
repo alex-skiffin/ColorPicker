@@ -7,7 +7,7 @@ import { ColorPickerService } from './Helpers/ColorPickerService';
 @Component({
     selector: 'color-picker',
     templateUrl: 'app/picker/picker.component.template.html',
-    styleUrls: [ 'app/picker/picker.component.css' ],
+    styleUrls: ['app/picker/picker.component.css'],
     providers: [ColorPickerService]
 })
 
@@ -25,13 +25,7 @@ export class ColorPickerComponent {
         return this.colorService.getColor();
     };
 
-    constructor(private colorService: ColorPickerService){
-    }
-
-    public ngOnInit(): void {
-        this.colorService.colorR='F0';
-        this.colorService.colorG='F0';
-        this.colorService.colorB='F0';
+    constructor(private colorService: ColorPickerService) {
         this.colorService.changeUrl();
     }
 }

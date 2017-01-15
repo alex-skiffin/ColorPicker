@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { ColorPickerService } from '../Helpers/ColorPickerService';
 
 @Component({
     selector: 'picker-area',
@@ -7,9 +8,42 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 })
 export class PickerAreaComponent {
     @ViewChild('area')
-	private area: ElementRef;
+    private area: ElementRef;
+    private size = 200;
 
-    constructor(){
+    constructor(private element: ElementRef, private colorService: ColorPickerService) {
+ 
+    }
 
+    ngAfterViewInit(): void {
+        var context = this.area.nativeElement.getContext("2d");
+        var grad = context.createLinearGradient(0, 200, 200, 0);
+        grad.addColorStop(0, 'red');
+        grad.addColorStop(1, 'green');
+        var ctx = this.area.nativeElement.getContext("2d");
+        ctx.clearRect(0, 0, 400, 400);
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, this.size, this.size);
+    }
+
+    private clickOnCanvas(event: any): void {
+        var canvas: any = document.getElementById('area');
+        var rect = canvas.getBoundingClientRect();
+        var x = event.clientX - rect.left;
+        var y = event.clientY - rect.top;
+        var context = this.area.nativeElement.getContext("2d");
+        var imgData = context.getImageData(x, y, 1, 1).data;
+        var R = this.toHex(imgData[0].toString());
+        var G = this.toHex(imgData[1].toString());
+        var B = this.toHex(imgData[2].toString());
+        this.colorService.setR(R);
+        this.colorService.setG(G);
+    }
+
+    private toHex(n: string): string {
+        let num = parseInt(n, 10);
+        if (isNaN(num)) return "00";
+        num = Math.max(0, Math.min(num, 255));
+        return "0123456789ABCDEF".charAt((num - num % 16) / 16) + "0123456789ABCDEF".charAt(num % 16);
     }
 }

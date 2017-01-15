@@ -1,3 +1,4 @@
-<canvas class="area" #area
-       
-     ></canvas>
+<canvas id="area" class="area"
+[attr.width]='size'
+[attr.height]='size'
+#area (mousedown)="clickOnCanvas($event)"></canvas>
