@@ -33,17 +33,10 @@ export class PickerAreaComponent {
         var y = event.clientY - rect.top;
         var context = this.area.nativeElement.getContext("2d");
         var imgData = context.getImageData(x, y, 1, 1).data;
-        var R = this.toHex(imgData[0].toString());
-        var G = this.toHex(imgData[1].toString());
-        var B = this.toHex(imgData[2].toString());
+        var R = this.colorService.toHex(imgData[0].toString());
+        var G = this.colorService.toHex(imgData[1].toString());
+        var B = this.colorService.toHex(imgData[2].toString());
         this.colorService.setR(R);
         this.colorService.setG(G);
-    }
-
-    private toHex(n: string): string {
-        let num = parseInt(n, 10);
-        if (isNaN(num)) return "00";
-        num = Math.max(0, Math.min(num, 255));
-        return "0123456789ABCDEF".charAt((num - num % 16) / 16) + "0123456789ABCDEF".charAt(num % 16);
     }
 }

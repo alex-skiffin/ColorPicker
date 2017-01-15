@@ -1,3 +1,6 @@
-
-<canvas class="ruler" #ruler></canvas>
+<canvas class="ruler" #ruler
+id='ruler'
+(mousedown)="clickOnCanvas($event)"
+[attr.width]='sizeW'
+[attr.height]='sizeH'></canvas>
       
