@@ -11,7 +11,10 @@
     "test": "tsc && concurrently \"tsc -w\" \"karma start karma.conf.js\"",
     "test-once": "tsc && karma start karma.conf.js --single-run",
     "tsc": "tsc",
-    "tsc:w": "tsc -w"
+    "tsc:w": "tsc -w",
+    "prod": "NODE_ENV=production ./bin/www",
+    "build:prod": "node bin/bundler.js --prod",
+    "postinstall": "npm run build:prod"
   },
   "keywords": [],
   "author": "",
