@@ -3,6 +3,7 @@ import { InputsComponent } from './inputs/inputs.component';
 import { PickerAreaComponent } from './picker-area/area.component';
 import { RulerComponent } from './ruler/ruler.component';
 import { ColorPickerService } from './Helpers/ColorPickerService';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'color-picker',
@@ -25,7 +26,12 @@ export class ColorPickerComponent {
         return this.colorService.getColor();
     };
 
-    constructor(private colorService: ColorPickerService) {
+    constructor(private colorService: ColorPickerService, private route: ActivatedRoute) {
+        if (route.url && route.url.value[0] && route.url.value[0].path){
+            if(this.colorService.checkColor(route.url.value[0].path)){
+                this.colorService.setColor(route.url.value[0].path);
+            }
+        }
         this.colorService.changeUrl();
     }
 }

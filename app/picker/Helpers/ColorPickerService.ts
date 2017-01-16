@@ -44,4 +44,14 @@ export class ColorPickerService {
     public changeUrl(): void {
         this.router.navigateByUrl("/" + this.getColorWithoutSharp());
     }
+
+    public checkColor(color: string): boolean {
+        return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test('#'+color);
+    }
+
+    public setColor(color: string): void {
+        this.setR(color[0]+color[1]);
+        this.setG(color[2]+color[3]);
+        this.setB(color[4]+color[5]);
+    }
 }
