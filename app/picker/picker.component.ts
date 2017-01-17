@@ -27,8 +27,8 @@ export class ColorPickerComponent {
     };
 
     constructor(private colorService: ColorPickerService, private route: ActivatedRoute) {
-        if (route.url && route.url.value[0] && route.url.value[0].path){
-            if(this.colorService.checkColor(route.url.value[0].path)){
+        if (route.url && route.url.value[0] && route.url.value[0].path) {
+            if (this.colorService.checkColor(route.url.value[0].path)) {
                 this.colorService.setColor(route.url.value[0].path);
             }
         }

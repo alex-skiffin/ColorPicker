@@ -4,26 +4,31 @@ import { Router } from '@angular/router';
 @Injectable()
 export class ColorPickerService {
 
-    private colorR: string = 'F0';
-    private colorG: string = 'F0';
-    private colorB: string = 'F0';
+    private color: Color = new Color();
+
+    public colorsChanged: EventEmitter<Color> = new EventEmitter<Color>();
 
     constructor(private router: Router) {
     }
 
     public setR(R: string) {
-        this.colorR = R;
-        this.changeUrl();
+        this.color.R = R;
+        this.updateAll();
     }
     public setG(G: string) {
-        this.colorG = G;
-        this.changeUrl();
+        this.color.G = G;
+        this.updateAll();
     }
     public setB(B: string) {
-        this.colorB = B;
-        this.changeUrl();
+        this.color.B = B;
+        this.updateAll();
     }
-    
+
+    private updateAll(): void {
+        this.changeUrl();
+        this.colorsChanged.emit(this.color);
+    }
+
     public toHex(n: string): string {
         let num = parseInt(n, 10);
         if (isNaN(num)) return "00";
@@ -35,10 +40,12 @@ export class ColorPickerService {
         return '#' + this.getColorWithoutSharp();
     };
 
+    public getColorRGB(): Color {
+        return this.color;
+    };
+
     private getColorWithoutSharp(): string {
-        return this.colorR
-            + this.colorG
-            + this.colorB;
+        return this.color.toString();
     }
 
     public changeUrl(): void {
@@ -46,12 +53,29 @@ export class ColorPickerService {
     }
 
     public checkColor(color: string): boolean {
-        return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test('#'+color);
+        return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test('#' + color);
     }
 
     public setColor(color: string): void {
-        this.setR(color[0]+color[1]);
-        this.setG(color[2]+color[3]);
-        this.setB(color[4]+color[5]);
+        this.color = new Color(color[0] + color[1], color[2] + color[3], color[4] + color[5]);
+    }
+}
+
+export class Color {
+    public R: string = 'F0';
+    public G: string = 'F0';
+    public B: string = 'F0';
+
+    constructor(colorR?: string, colorG?: string, colorB?: string) {
+        if (colorR)
+            this.R = colorR;
+        if (colorG)
+            this.G = colorG;
+        if (colorB)
+            this.B = colorB;
+    }
+
+    toString(): string {
+        return this.R + this.G + this.B;
     }
 }

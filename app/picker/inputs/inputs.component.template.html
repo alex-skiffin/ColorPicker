@@ -1,7 +1,7 @@
 <br/>
 <label>R:</label>
-<input class="color-input" type="text" [value]="colorService.colorR" (keyup)="colorService.setR(validateInput($event.target.value))">
+<input class="color-input" type="text" [value]="colorService.color.R" (keyup)="colorService.setR(validateInput($event.target.value))">
 <label>G:</label>
-<input class="color-input" type="text" [value]="colorService.colorG" (input)="colorService.setG(validateInput($event.target.value))">
+<input class="color-input" type="text" [value]="colorService.color.G" (input)="colorService.setG(validateInput($event.target.value))">
 <label>B:</label>
-<input class="color-input" type="text" [value]="colorService.colorB" (input)="colorService.setB(validateInput($event.target.value))">
+<input class="color-input" type="text" [value]="colorService.color.B" (input)="colorService.setB(validateInput($event.target.value))">
