@@ -27,11 +27,11 @@ export class ColorPickerComponent {
     };
 
     constructor(private colorService: ColorPickerService, private route: ActivatedRoute) {
-        if (route.url && route.url.value[0] && route.url.value[0].path) {
-            if (this.colorService.checkColor(route.url.value[0].path)) {
-                this.colorService.setColor(route.url.value[0].path);
+            if (this.route.fragment.value) {
+                if (this.colorService.checkColor(this.route.fragment.value)) {
+                    this.colorService.setColor(this.route.fragment.value);
+                }
             }
-        }
         this.colorService.changeUrl();
     }
 }
