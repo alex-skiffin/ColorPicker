@@ -26,15 +26,43 @@ export class PickerAreaComponent {
 
     private drawArea(): void {
         let context = this.area.nativeElement.getContext('2d');
-        let grad = context.createLinearGradient(0, 200, 200, 0);
-        let startColor: string = '#FF00' + this.colorService.getColorRGB().B;
-        let stopColor: string = '#00FF' + this.colorService.getColorRGB().B;
-        grad.addColorStop(0, startColor);
-        grad.addColorStop(1, stopColor);
-        let ctx = this.area.nativeElement.getContext('2d');
-        ctx.clearRect(0, 0, 400, 400);
-        ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, this.size, this.size);
+        let gradient, startColor, endColor, fac;
+        
+        for (let i = 0; i < this.size; i++) {
+            gradient = context.createLinearGradient(0, i, this.size, i);
+            fac = i / (this.size - 1);
+
+            startColor = this.arrayToRGBA(
+                this.lerp([0, 0, parseInt(this.colorService.getColorRGB().B, 16), 1], 
+                [0, 255, parseInt(this.colorService.getColorRGB().B, 16), 1], fac)
+            );
+            endColor = this.arrayToRGBA(
+                this.lerp([255, 0, parseInt(this.colorService.getColorRGB().B, 16), 1],
+                 [255, 255, parseInt(this.colorService.getColorRGB().B, 16), 0], fac)
+            );
+
+            gradient.addColorStop(0, startColor);
+            gradient.addColorStop(1, endColor);
+
+            context.fillStyle = gradient;
+            context.fillRect(0, i, this.size, i);
+        }
+    }
+
+    private arrayToRGBA(arr: number[]): string {
+        var ret = arr.map(function (v) {
+            return Math.max(Math.min(Math.round(v), 255), 0);
+        });
+
+        ret[3] = arr[3];
+
+        return 'rgba(' + ret.join(',') + ')';
+    }
+
+    private lerp(a: number[], b: number[], fac: number): number[] {
+        return a.map(function (v, i) {
+            return v * (1 - fac) + b[i] * fac;
+        });
     }
 
     private clickOnCanvas(event: any): void {
