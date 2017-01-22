@@ -49,7 +49,7 @@ export class ColorPickerService {
     }
 
     public changeUrl(): void {
-        this.router.navigateByUrl('index.html#'+this.getColorWithoutSharp());
+        this.router.navigate(['index.html'], { fragment: this.getColorWithoutSharp() });
     }
 
     public checkColor(color: string): boolean {
@@ -58,6 +58,7 @@ export class ColorPickerService {
 
     public setColor(color: string): void {
         this.color = new Color(color[0] + color[1], color[2] + color[3], color[4] + color[5]);
+        this.colorsChanged.emit(this.color);
     }
 }
 

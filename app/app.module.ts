@@ -9,10 +9,9 @@ import { RulerComponent } from './picker/ruler/ruler.component';
 import { InputsComponent } from './picker/inputs/inputs.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/index.html#:id', pathMatch: 'full' },
   {
-    path: 'index.html#:id',
-    component: ColorPickerComponent,
+    path: '',
+    redirectTo: '/index.html#F0F0F0',
     pathMatch: 'full'
   },
   {
