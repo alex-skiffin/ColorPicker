@@ -66,8 +66,7 @@ export class PickerAreaComponent {
     }
 
     private clickOnCanvas(event: any): void {
-        let canvas: any = document.getElementById('area');
-        let rect = canvas.getBoundingClientRect();
+        let rect = this.area.nativeElement.getBoundingClientRect();
         let x = event.clientX - rect.left;
         let y = event.clientY - rect.top;
         let context = this.area.nativeElement.getContext('2d');
