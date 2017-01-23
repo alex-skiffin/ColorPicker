@@ -13,5 +13,6 @@ ColorPicker позволяет выбрать цвет с помощью нес�
 git clone https://github.com/alex-skiffin/ColorPicker.git
 cd ColorPicker
 npm install
+webpack
 npm start
 ```
